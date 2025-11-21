@@ -146,14 +146,16 @@ export default {
                 }
             }
         },
-        applyGlyphEffect({ state, dispatch }, name) {
-            const glyph = state.glyph[name];
+        applyGlyphEffect({ state, dispatch }, o) {
+            let trigger = o.onLevel ?? false;
+            const glyph = state.glyph[o.name];
             glyph.effect.forEach(elem => {
                 dispatch('system/applyEffect', {
                     type: elem.type,
                     name: elem.name,
-                    multKey: `relicGlyph_${ name }`,
-                    value: elem.value(Math.floor(glyph.progress))
+                    multKey: `relicGlyph_${ o.name }`,
+                    value: elem.value(Math.floor(glyph.progress)),
+                    trigger
                 }, {root: true});
             });
         },

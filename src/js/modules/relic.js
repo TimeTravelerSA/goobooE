@@ -29,7 +29,7 @@ export default {
                 }
                 store.commit('relic/updateGlyphKey', {name: key, key: 'progress', value: newProgress});
                 if (Math.floor(newProgress) > Math.floor(oldProgress)) {
-                    store.dispatch('relic/applyGlyphEffect', key);
+                    store.dispatch('relic/applyGlyphEffect', {name: key, onLevel: true});
                 }
             }
         }
@@ -102,7 +102,7 @@ export default {
                 if (store.state.relic.glyph[key]) {
                     store.commit('relic/updateGlyphKey', {name: key, key: 'progress', value: elem});
                     if (elem >= 1) {
-                        store.dispatch('relic/applyGlyphEffect', key);
+                        store.dispatch('relic/applyGlyphEffect', {name: key});
                     }
                 }
             }
