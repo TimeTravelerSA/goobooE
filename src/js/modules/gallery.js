@@ -110,7 +110,7 @@ export default {
     },
     currency: {
         beauty: {color: 'deep-purple', icon: 'mdi-image-filter-vintage', gainMult: {baseValue: 1, display: 'perSecond'}, showGainMult: true, showGainTimer: true, timerIsEstimate: true},
-        converter: {multUnlock: 'galleryConversion', color: 'pale-green', icon: 'mdi-recycle', overcapMult: 0.75, overcapScaling: 0.95, gainMult: {baseValue: 0.2, display: 'perSecond'}, showGainMult: true, capMult: {baseValue: 1000}},
+        converter: {multUnlock: 'galleryConversion', color: 'pale-green', icon: 'mdi-recycle', overcapMult: 0.75, overcapScaling: 0.95, gainMult: {baseValue: 0.2, display: 'perSecond'}, showGainMult: true, showGainTimer: true, capMult: {baseValue: 1000}},
         inspiration: {multUnlock: 'galleryInspiration', color: 'yellow', icon: 'mdi-lightbulb-on', display: 'int'},
         package: {multUnlock: 'galleryDrums', color: 'beige', icon: 'mdi-package-variant', overcapMult: 0.8, overcapScaling: 0.8, gainMult: {baseValue: 0.0125, display: 'perSecond'}, showGainMult: true, showGainTimer: true, capMult: {baseValue: 10}},
         motivation: {multUnlock: 'galleryShape', type: 'shape', color: 'pink-purple', icon: 'mdi-emoticon-excited', overcapMult: 0.5, gainMult: {baseValue: 0.01, display: 'perSecond'}, showGainMult: true, showGainTimer: true, capMult: {baseValue: 100}},

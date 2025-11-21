@@ -47,6 +47,8 @@
 </template>
 
 <script>
+import { GALLERY_CONVERTER_EXPONENT } from '../../../js/constants';
+import { logBase } from '../../../js/utils/math';
 import { formatInt, formatNum } from '../../../js/utils/format';
 import StatBreakdown from '../../render/StatBreakdown.vue';
 import DisplayRow from '../upgrade/DisplayRow.vue';
@@ -186,14 +188,34 @@ export default {
       if (!this.showTimer || this.needed === null || !this.affordCap || this.needed <= this.currency.value) {
         return null;
       }
-      const gainAmount = this.currency.showGainTimer ? this.gainAmount : this.timerFunction;
+      
+      let interestBonus = 0;
+      if (this.name === 'gallery_converter') {
+        const amount = this.$store.getters['currency/value'](`gallery_converter`);
+        if (amount > 0) {
+          interestBonus = amount * GALLERY_CONVERTER_EXPONENT;
+        }
+      }
+      
+      const gainAmount = this.currency.showGainTimer ? (this.gainAmount + interestBonus) : this.timerFunction;
       return Math.ceil((this.needed - this.currency.value) * this.gainTimeMult / gainAmount);
     },
     capTimerNeeded() {
       if (!this.showTimer || this.needed !== null || this.currency.cap === null || this.overcapMult <= 0) {
         return null;
       }
-      const gainAmount = this.currency.showGainTimer ? this.gainAmount : this.timerFunction;
+      
+      let interestBonus = 0;
+      if (this.name === 'gallery_converter') {
+        if (this.isOvercap) {
+          interestBonus = this.currency.cap * GALLERY_CONVERTER_EXPONENT;
+        }
+        else {
+          return Math.ceil(logBase((this.currency.cap/400 + this.gainAmount)/(this.currency.value/400 + this.gainAmount), 1.0025));
+        }
+      }
+      
+      const gainAmount = this.currency.showGainTimer ? (this.gainAmount + interestBonus) : this.timerFunction;
       return Math.ceil((this.currency.cap * (this.overcapStage + 1) - this.currency.value) * this.gainTimeMult / (gainAmount * this.overcapMult));
     },
     formattedValue() {
