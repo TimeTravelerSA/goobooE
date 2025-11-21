@@ -1211,7 +1211,7 @@ export default {
                 }
             } else if (subfeature === 1) {
                 // Add courage score
-                const scoreGain = getters.courageScoreGain;
+                const scoreGain = rootGetters['mult/get']('hordeCourageScore', getters.courageScoreGain);
                 if (scoreGain > 0) {
                     commit('updateKey', {key: 'courageScore', value: state.courageScore + scoreGain * amount});
                 }

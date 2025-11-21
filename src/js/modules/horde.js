@@ -559,7 +559,7 @@ export default {
                                 const split = name.split('_');
                                 if (split[0] === 'skill') {
                                     const skill = store.state.horde.fighterClass[store.state.horde.selectedClass].skills[split[1]];
-                                    return {ready: store.state.horde.skillActive[name] <= 0, type: skill.activeType, effect: skill.active(skill.level), activeMult: 1, cost: skill.activeCost(skill.level), name};
+                                    return {ready: store.state.horde.skillActive[name] <= 0, type: skill.activeType, effect: skill.active(store.state.horde.skillLevel[split[1]]), activeMult: 1, cost: skill.activeCost(store.state.horde.skillLevel[split[1]]), name};
                                 } else if (split[0] === 'trinket') {
                                     const trinket = store.state.horde.trinket[split[1]];
                                     return {ready: store.state.horde.skillActive[name] <= 0, type: trinket.activeType, effect: trinket.active(trinket.level), activeMult: 1, cost: trinket.activeCost(trinket.level), name};

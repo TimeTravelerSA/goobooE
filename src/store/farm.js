@@ -645,18 +645,18 @@ export default {
                     // Gain currency based on crop type
                     const gainAmount = rootGetters['mult/get'](
                         'currencyFarm' + capitalize(crop.type) + 'Gain',
-                        crop.yield + (field.care.yield ?? 0) + geneStats.mult.farmCropGain.baseValue,
+                        crop.yield + geneStats.mult.farmCropGain.baseValue,
                         (((field.buildingEffect.flag ?? 0) / field.time) * 0.5 + 1) * geneStats.mult.farmCropGain.multValue
-                    ) * allGainBoost * field.grow;
+                    ) * allGainBoost * ((field.care.yield ?? 0) + 1) * field.grow;
                     dispatch('currency/gain', {feature: 'farm', name: crop.type, amount: gainAmount}, {root: true});
                     if (geneStats.tag.includes('farmYieldConversion')) {
                         ['vegetable', 'berry', 'grain', 'flower'].forEach(croptype => {
                             if (crop.type !== croptype) {
                                 const conversionAmount = rootGetters['mult/get'](
                                     'currencyFarm' + capitalize(croptype) + 'Gain',
-                                    crop.yield + (field.care.yield ?? 0) + geneStats.mult.farmCropGain.baseValue,
+                                    crop.yield + geneStats.mult.farmCropGain.baseValue,
                                     (((field.buildingEffect.flag ?? 0) / field.time) * 0.5 + 1) * geneStats.mult.farmCropGain.multValue
-                                ) * allGainBoost * field.grow;
+                                ) * allGainBoost * ((field.care.yield ?? 0) + 1) * field.grow;
                                 dispatch('currency/gain', {feature: 'farm', name: croptype, amount: conversionAmount * 0.05}, {root: true});
                             }
                         });
